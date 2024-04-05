@@ -28,8 +28,8 @@ Set-Service -Name gupdatem -StartupType Disabled
 Add-Content $logFilePath "`nThe service 'gupdatem' has been Disabled."
 (Get-Service 'gupdatem').StartType | Out-File -FilePath $logFilePath -Append
 
+# Stop Chrome Updates ScheduledTask
+Get-ScheduledTask | Where-Object { $_.Taskname -like "GoogleUpdate*" } | Disable-ScheduledTask
+
 # Show the contents of the log file
 Get-Content $logFilePath
-
-
-
